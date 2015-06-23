@@ -74,9 +74,12 @@ static NSArray *supportFileFormats = nil;
 
 - (void)openProject
 {
-    NSString *filePath = [self getTrueFilePath];
+    // 得到项目目录path
+    NSString *directoryPath = [self getProjectDir];
     
-    NSString *directoryPath = [self getProjectDirectoryFromWorksapcePath:filePath];
+    // 得到当前文件目录的Path
+//    NSString *filePath = [self getTrueFilePath];
+//    NSString *directoryPath = [self getProjectDirectoryFromWorksapcePath:filePath];
     
     [self openProjectInTerminal:directoryPath];
 }
@@ -165,6 +168,11 @@ static NSArray *supportFileFormats = nil;
 {
     NSString *workspacePath = [self getWorkspacePath];
     return [self getProjectFileNameFromWorkSpace:workspacePath];
+}
+- (NSString *)getProjectDir
+{
+    NSString *workspacePath = [self getWorkspacePath];
+    return [workspacePath stringByDeletingLastPathComponent];
 }
 
 - (NSString *)getProjectFileNameFromWorkSpace:(NSString *)workspacePath
